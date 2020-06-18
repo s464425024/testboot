@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.chaoyue.dao.TestMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -15,6 +17,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class TestController {
     @Autowired(required = false)
     TestMapper testMapper;
@@ -24,10 +27,11 @@ public class TestController {
 
 
     @GetMapping("/test-db")
-    public String testDb(){
+    @ResponseBody
+    public Map testDb(){
         Map map = testMapper.getMap();
         log.info("=====,{}",map);
-        return "a";
+        return map;
     }
 
     @GetMapping("/test-redis")
