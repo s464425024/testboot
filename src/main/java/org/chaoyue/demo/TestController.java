@@ -42,7 +42,7 @@ public class TestController {
             jedis.setex(key,12,"2222");
             log.info("key={},value={}",key,jedis.get(key));
         }
-        log.info("active={}",jedisPool.getNumActive());
+        log.info("value={}",jedisPool.getResource().get(key));
         return "redis";
     }
 }
